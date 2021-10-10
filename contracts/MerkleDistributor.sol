@@ -11,9 +11,9 @@ interface IMerkleDistributor {
     // Returns the merkle root of the merkle tree containing account balances available to claim.
     function merkleRoot() external view returns (bytes32);
     // Returns true if the index has been marked claimed.
-    function isClaimed(uint256 index) external view returns (bool);
+    function isMinted(uint256 index) external view returns (bool);
     // Claim the given amount of the token to the given address. Reverts if the inputs are invalid.
-    function claim(uint256 index, address account, uint256 amount, bytes32[] calldata merkleProof, uint256 tipBips) external;
+    function mint(uint256 index, address account, uint256 amount, bytes32[] calldata merkleProof) external;
 
     // This event is triggered whenever a call to #claim succeeds.
     event Claimed(uint256 index, address account, uint256 amount);
@@ -33,7 +33,7 @@ contract MerkleDistributor is IMerkleDistributor {
         deployer = msg.sender;
     }
 
-    function isClaimed(uint256 index) public view override returns (bool) {
+    function isMinted(uint256 index) public view override returns (bool) {
         uint256 claimedWordIndex = index / 256;
         uint256 claimedBitIndex = index % 256;
         uint256 claimedWord = claimedBitMap[claimedWordIndex];
@@ -41,36 +41,23 @@ contract MerkleDistributor is IMerkleDistributor {
         return claimedWord & mask == mask;
     }
 
-    function _setClaimed(uint256 index) private {
+    function _setMinted(uint256 index) private {
         uint256 claimedWordIndex = index / 256;
         uint256 claimedBitIndex = index % 256;
         claimedBitMap[claimedWordIndex] = claimedBitMap[claimedWordIndex] | (1 << claimedBitIndex);
     }
 
-    function claim(uint256 index, address account, uint256 amount, bytes32[] calldata merkleProof, uint256 tipBips) external override {
-        require(tipBips <= 10000);
-        require(!isClaimed(index), 'MerkleDistributor: Drop already claimed.');
+    function mint(uint256 index, address account, uint256 amount, bytes32[] calldata merkleProof) external override {
+        require(!isMinted(index), 'MerkleDistributor: Mint already claimed.');
 
         // Verify the merkle proof.
         bytes32 node = keccak256(abi.encodePacked(index, account, amount));
         require(MerkleProof.verify(merkleProof, merkleRoot, node), 'MerkleDistributor: Invalid proof.');
 
         // Mark it claimed and send the token.
-        _setClaimed(index);
-        uint256 tip = account == msg.sender ? amount * tipBips / 10000 : 0;
-        require(IERC20(token).transfer(account, amount - tip), 'MerkleDistributor: Transfer failed.');
-        if (tip > 0) require(IERC20(token).transfer(deployer, tip));
+        _setMinted(index);
+        require(IERC20(token).transfer(account, amount), 'MerkleDistributor: Transfer failed.');
 
         emit Claimed(index, account, amount);
-    }
-
-    function collectDust(address _token, uint256 _amount) external {
-      require(msg.sender == deployer, "!deployer");
-      require(_token != token, "!token");
-      if (_token == address(0)) { // token address(0) = ETH
-        payable(deployer).transfer(_amount);
-      } else {
-        IERC20(_token).transfer(deployer, _amount);
-      }
     }
 }
