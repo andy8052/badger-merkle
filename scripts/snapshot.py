@@ -104,7 +104,7 @@ class MerkleTree:
         return web3.keccak(b''.join(sorted([a, b])))
 
 
-@cached('snapshot/08-merkle-distribution.json')
+@cached('snapshot/presale-merkle.json')
 def step_07(balances):
     elements = [(index, account, amount) for index, (account, amount) in enumerate(balances.items())]
     nodes = [encode_hex(encode_abi_packed(['uint', 'address', 'uint'], el)) for el in elements]
@@ -123,159 +123,160 @@ def step_07(balances):
 
 def main():
 
-    final = Counter()
-    with open('./snapshot/bakcHolders.json') as json_file:
-        bakc = json.load(json_file)
+    # final = Counter()
+    # with open('./snapshot/bakcHolders.json') as json_file:
+    #     bakc = json.load(json_file)
 
-    for key in bakc:
-        final[key] = 1
+    # for key in bakc:
+    #     final[key] = 1
 
-    with open('./snapshot/baycHolders.json') as json_file:
-        bayc = json.load(json_file)
+    # with open('./snapshot/baycHolders.json') as json_file:
+    #     bayc = json.load(json_file)
 
-    for key in bayc:
-        final[key] = 1
+    # for key in bayc:
+    #     final[key] = 1
 
-    with open('./snapshot/ccHolders.json') as json_file:
-        cc = json.load(json_file)
+    # with open('./snapshot/ccHolders.json') as json_file:
+    #     cc = json.load(json_file)
 
-    for key in cc:
-        final[key] = 1
+    # for key in cc:
+    #     final[key] = 1
 
-    with open('./snapshot/dogeHolders.json') as json_file:
-        doge = json.load(json_file)
+    # with open('./snapshot/dogeHolders.json') as json_file:
+    #     doge = json.load(json_file)
 
-    for key in doge:
-        final[key] = 1
+    # for key in doge:
+    #     final[key] = 1
 
-    with open('./snapshot/groupHolders.json') as json_file:
-        group = json.load(json_file)
+    # with open('./snapshot/groupHolders.json') as json_file:
+    #     group = json.load(json_file)
 
-    for key in group:
-        final[key] = 1
+    # for key in group:
+    #     final[key] = 1
 
-    with open('./snapshot/humanHolders.json') as json_file:
-        human = json.load(json_file)
+    # with open('./snapshot/humanHolders.json') as json_file:
+    #     human = json.load(json_file)
 
-    for key in human:
-        final[key] = 1
+    # for key in human:
+    #     final[key] = 1
 
-    with open('./snapshot/kongzHolders.json') as json_file:
-        kongz = json.load(json_file)
+    # with open('./snapshot/kongzHolders.json') as json_file:
+    #     kongz = json.load(json_file)
 
-    for key in kongz:
-        final[key] = 1
+    # for key in kongz:
+    #     final[key] = 1
 
-    with open('./snapshot/lionHolders.json') as json_file:
-        lion = json.load(json_file)
+    # with open('./snapshot/lionHolders.json') as json_file:
+    #     lion = json.load(json_file)
 
-    for key in lion:
-        final[key] = 1
+    # for key in lion:
+    #     final[key] = 1
 
-    with open('./snapshot/lootHolders.json') as json_file:
-        loot = json.load(json_file)
+    # with open('./snapshot/lootHolders.json') as json_file:
+    #     loot = json.load(json_file)
 
-    for key in loot:
-        final[key] = 1
+    # for key in loot:
+    #     final[key] = 1
 
-    with open('./snapshot/maskHolders.json') as json_file:
-        mask = json.load(json_file)
+    # with open('./snapshot/maskHolders.json') as json_file:
+    #     mask = json.load(json_file)
 
-    for key in mask:
-        final[key] = 1
+    # for key in mask:
+    #     final[key] = 1
 
-    with open('./snapshot/maycHolders.json') as json_file:
-        mayc = json.load(json_file)
+    # with open('./snapshot/maycHolders.json') as json_file:
+    #     mayc = json.load(json_file)
 
-    for key in mayc:
-        final[key] = 1
+    # for key in mayc:
+    #     final[key] = 1
 
-    with open('./snapshot/meebitsHolders.json') as json_file:
-        meebits = json.load(json_file)
+    # with open('./snapshot/meebitsHolders.json') as json_file:
+    #     meebits = json.load(json_file)
 
-    for key in meebits:
-        final[key] = 1
+    # for key in meebits:
+    #     final[key] = 1
 
-    with open('./snapshot/mekaHolders.json') as json_file:
-        meka = json.load(json_file)
+    # with open('./snapshot/mekaHolders.json') as json_file:
+    #     meka = json.load(json_file)
 
-    for key in meka:
-        final[key] = 1
+    # for key in meka:
+    #     final[key] = 1
 
-    with open('./snapshot/n1Holders.json') as json_file:
-        n1 = json.load(json_file)
+    # with open('./snapshot/n1Holders.json') as json_file:
+    #     n1 = json.load(json_file)
 
-    for key in n1:
-        final[key] = 1
+    # for key in n1:
+    #     final[key] = 1
 
-    with open('./snapshot/pengHolders.json') as json_file:
-        peng = json.load(json_file)
+    # with open('./snapshot/pengHolders.json') as json_file:
+    #     peng = json.load(json_file)
 
-    for key in peng:
-        final[key] = 1
+    # for key in peng:
+    #     final[key] = 1
 
-    with open('./snapshot/punkHolders.json') as json_file:
-        punk = json.load(json_file)
+    # with open('./snapshot/punkHolders.json') as json_file:
+    #     punk = json.load(json_file)
 
-    for key in punk:
-        final[key] = 1
+    # for key in punk:
+    #     final[key] = 1
 
-    with open('./snapshot/supHolders.json') as json_file:
-        sup = json.load(json_file)
+    # with open('./snapshot/supHolders.json') as json_file:
+    #     sup = json.load(json_file)
 
-    for key in sup:
-        final[key] = 1
+    # for key in sup:
+    #     final[key] = 1
 
-    with open('./snapshot/toadzHolders.json') as json_file:
-        toadz = json.load(json_file)
+    # with open('./snapshot/toadzHolders.json') as json_file:
+    #     toadz = json.load(json_file)
 
-    for key in toadz:
-        final[key] = 1
+    # for key in toadz:
+    #     final[key] = 1
 
-    with open('./snapshot/vampHolders.json') as json_file:
-        vamp = json.load(json_file)
+    # with open('./snapshot/vampHolders.json') as json_file:
+    #     vamp = json.load(json_file)
 
-    for key in vamp:
-        final[key] = 1
+    # for key in vamp:
+    #     final[key] = 1
 
-    with open('./snapshot/veeHolders.json') as json_file:
-        vee = json.load(json_file)
+    # with open('./snapshot/veeHolders.json') as json_file:
+    #     vee = json.load(json_file)
 
-    for key in vee:
-        final[key] = 1
+    # for key in vee:
+    #     final[key] = 1
 
-    with open('./snapshot/vxHolders.json') as json_file:
-        vx = json.load(json_file)
+    # with open('./snapshot/vxHolders.json') as json_file:
+    #     vx = json.load(json_file)
 
-    for key in vx:
-        final[key] = 1
+    # for key in vx:
+    #     final[key] = 1
 
-    with open('./snapshot/wowHolders.json') as json_file:
-        wow = json.load(json_file)
+    # with open('./snapshot/wowHolders.json') as json_file:
+    #     wow = json.load(json_file)
 
-    for key in wow:
-        final[key] = 1
+    # for key in wow:
+    #     final[key] = 1
 
-    with open('./snapshot/boiHolders.json') as json_file:
-        boi = json.load(json_file)
+    # with open('./snapshot/boiHolders.json') as json_file:
+    #     boi = json.load(json_file)
 
-    for key in boi:
-        final[key] = 1
+    # for key in boi:
+    #     final[key] = 1
 
-    with open('./snapshot/bibiHolders.json') as json_file:
-        bibi = json.load(json_file)
+    # with open('./snapshot/bibiHolders.json') as json_file:
+    #     bibi = json.load(json_file)
 
-    for key in bibi:
-        final[key] = 1
+    # for key in bibi:
+    #     final[key] = 1
 
-    with open('./snapshot/droidHolders.json') as json_file:
-        droid = json.load(json_file)
+    # with open('./snapshot/droidHolders.json') as json_file:
+    #     droid = json.load(json_file)
 
-    for key in droid:
-        final[key] = 1
+    # for key in droid:
+    #     final[key] = 1
     
-    print(len(final.keys()))
+    # print(len(final.keys()))
 
-    with open('./snapshot/final.json', 'w') as fp:
-        json.dump(final, fp)
+    with open('./snapshot/presale.json') as json_file:
+        final = json.load(json_file)
+
     step_07(final)
